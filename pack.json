@@ -1,0 +1,7 @@
+{
+	"name": "Dave & Bambi HUD",
+	"description": "Makes the game so it looks like it's running in Dave Engine.",
+	"restart":false,
+	"runsGlobally": true,
+	"color": [0, 127, 127]
+}
