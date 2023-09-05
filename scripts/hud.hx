@@ -20,7 +20,7 @@ var settings:StringMap = [
 
 var credits:StringMap = [
 	// add your mod songs below! i, tehpuertoricanspartan, left an example. you can remove it if you want. if you have problems with the map, take a hint from the song name to the left
-	"street-sights" => "someone come get tprs' wife back to his place, she MAD",
+	"test" => "what? it's a test song",
 ];
 
 // don't touch ANY of the shit below unless you know what you're doing
@@ -31,8 +31,6 @@ var iconProp2:FlxSprite;
 var kadeEngineWatermark:FlxText;
 var creditsWatermark:FlxText;
 
-var oldWindowName:String;
-
 var ogIconSize:Array<Array<Int>> = [];
 function onCreatePost() {
 	if (settings.get("font") == "comic.ttf")
@@ -41,7 +39,6 @@ function onCreatePost() {
 		Main.fpsVar.defaultTextFormat = new TextFormat("_sans", 12, 0xFFFFFF, false);
 
 	if (settings.get("windowTabChange")) {
-		oldWindowName = Application.current.window.name;
     	Application.current.window.setIcon(Image.fromFile(Paths.modFolders('images/windowIcons/dave.png'))); // thx to drawoon for the og icon code!
 		Lib.application.window.title = "Friday Night Funkin' | VS. Dave and Bambi v3.0b";
 	}
@@ -53,10 +50,9 @@ function onCreatePost() {
 	iconProp2 = new FlxSprite().makeGraphic(game.iconP2._frame.frame.width, game.iconP2._frame.frame.height, 0xFF000000);
 	ogIconSize.push([game.iconP2._frame.frame.width, game.iconP2._frame.frame.height]);
 
-	game.healthBar.y = (ClientPrefs.data.downScroll ? 50 : FlxG.height * 0.9);
-	game.timeBar.y = (ClientPrefs.data.downScroll ? (FlxG.height * 0.9) + 20 : 30);
-	game.iconP1.y = game.healthBar.y - (game.iconP1.height / 2);
-	game.iconP2.y = game.healthBar.y - (game.iconP2.height / 2);
+	game.timeBar.alpha = 1;
+	game.timeTxt.visible = true;
+	game.timeTxt.alpha = 1;
 
 	var bars:Array<Dynamic> = [game.healthBar, game.timeBar];
 	for (i in bars) {
@@ -65,11 +61,15 @@ function onCreatePost() {
 		i.barOffset.set(4, 4);
 		i.screenCenter(1);
 	}
+	game.healthBar.y = (ClientPrefs.data.downScroll ? 50 : FlxG.height * 0.9);
+	game.iconP1.y = game.healthBar.y - (game.iconP1.height / 2);
+	game.iconP2.y = game.healthBar.y - (game.iconP2.height / 2);
+	game.timeBar.y = (ClientPrefs.data.downScroll ? (FlxG.height * 0.9) + 20 : 30);
 
 	var xValues = getMinAndMax(game.timeTxt.width, game.timeBar.width);
 	var yValues = getMinAndMax(game.timeTxt.height, game.timeBar.height);
 	game.timeTxt.x = game.timeBar.x - ((xValues[0] - xValues[1]) / 2);
-	game.timeTxt.y = game.timeBar.y + ((yValues[0] - yValues[1]));
+	game.timeTxt.y = game.timeBar.y + ((yValues[0] - yValues[1]) / (settings.get("font") == "comic.ttf" ? 1 : 2));
 	game.timeTxt.setFormat(Paths.font(settings.get("font")), 32 * settings.get("fontScale"), 0xFFFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
 	game.timeTxt.borderSize = 2.5 * settings.get("fontScale");
 	game.timeBar.leftBar.color = 0xFF37FF14;
@@ -105,7 +105,7 @@ function onCountdownStarted() {
 	for (i in game.strumLineNotes) {
 		i.x += 5.5;
 		if (ClientPrefs.data.downScroll)
-			i.y = FlxG.height - 165;
+			i.y -= 15;
 	}
 	for (j in 0...game.playerStrums.length) {
 		game.setOnLuas('defaultPlayerStrumX' + j, game.playerStrums.members[j].x);
