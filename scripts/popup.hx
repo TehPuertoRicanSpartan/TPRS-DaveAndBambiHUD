@@ -2,6 +2,7 @@ import haxe.ds.StringMap;
 import flixel.text.FlxText;
 import flixel.text.FlxTextBorderStyle;
 import flixel.group.FlxTypedSpriteGroup;
+import llua.Lua_helper;
 
 var songHeading:StringMap = [
     // add your custom song headings here! legend from left to right is on the side
@@ -39,7 +40,7 @@ function onCreatePost() {
 	funnyText.antialiasing = (info[1] && ClientPrefs.data.antialiasing);
 	creditsPopup.add(funnyText);
 
-	funnyIcon = new FlxSprite(0, 0, Paths.image(info[5]));
+	funnyIcon = new FlxSprite(0, 0, Paths.image((info[5] != null ? info[5] : "credits/missing_icon")));
 	var offset = info[3];
 	var scaleValues = getMinAndMax(funnyIcon.height, funnyText.height);
 	funnyIcon.setGraphicSize(Std.int(funnyIcon.height / (scaleValues[1] / scaleValues[0])));
@@ -60,12 +61,12 @@ function onSongStart() {
 	creditsPopup.x = creditsPopup.width * -1;
 	add(creditsPopup);
 
-	FlxTween.tween(creditsPopup, {x: 0}, 0.5, {ease: FlxEase.backOut, onComplete: function(tweeen:FlxTween)
+	FlxTween.tween(creditsPopup, {x: 0}, 0.5 / game.playbackRate, {ease: FlxEase.backOut, onComplete: function(tweeen:FlxTween)
 	{
-		FlxTween.tween(creditsPopup, {x: creditsPopup.width * -1} , 1, {ease: FlxEase.backIn, onComplete: function(tween:FlxTween)
+		FlxTween.tween(creditsPopup, {x: creditsPopup.width * -1} , 1  / game.playbackRate, {ease: FlxEase.backIn, onComplete: function(tween:FlxTween)
 		{
 			creditsPopup.destroy();
-		}, startDelay: 3});
+		}, startDelay: 3 / game.playbackRate});
 	}});
 }
 
