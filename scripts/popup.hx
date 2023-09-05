@@ -2,7 +2,6 @@ import haxe.ds.StringMap;
 import flixel.text.FlxText;
 import flixel.text.FlxTextBorderStyle;
 import flixel.group.FlxTypedSpriteGroup;
-import llua.Lua_helper;
 
 var songHeading:StringMap = [
     // add your custom song headings here! legend from left to right is on the side
