@@ -34,7 +34,7 @@ function onCreatePost() {
 	creditsPopup.add(bg);
 
 	funnyText = new FlxText(1, 0, 650, "Song by " + info[4], 16);
-	funnyText.setFormat(Paths.font("comic.ttf"), 30, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK); // i hate when you have to change the font for the popup too
+	funnyText.setFormat(Paths.font(dnbFont), 30, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	funnyText.borderSize = 2;
 	funnyText.antialiasing = (info[1] && ClientPrefs.data.antialiasing);
 	creditsPopup.add(funnyText);

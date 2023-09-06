@@ -33,6 +33,8 @@ var creditsWatermark:FlxText;
 
 var ogIconSize:Array<Array<Int>> = [];
 function onCreatePost() {
+	game.setOnHScript("dnbFont", settings.get("font"));
+	
 	if (settings.get("font") == "comic.ttf")
 		Main.fpsVar.defaultTextFormat = new TextFormat(Paths.font('comic.ttf'), 15, 0xFFFFFF, true);
 	else
@@ -108,12 +110,12 @@ function onCountdownStarted() {
 			i.y -= 15;
 	}
 	for (j in 0...game.playerStrums.length) {
-		game.setOnLuas('defaultPlayerStrumX' + j, game.playerStrums.members[j].x);
-		game.setOnLuas('defaultPlayerStrumY' + j, game.playerStrums.members[j].y);
+		game.setOnScripts('defaultPlayerStrumX' + j, game.playerStrums.members[j].x);
+		game.setOnScripts('defaultPlayerStrumY' + j, game.playerStrums.members[j].y);
 	}
 	for (j in 0...game.opponentStrums.length) {
-		game.setOnLuas('defaultOpponentStrumX' + j, game.opponentStrums.members[j].x);
-		game.setOnLuas('defaultOpponentStrumY' + j, game.opponentStrums.members[j].y);
+		game.setOnScripts('defaultOpponentStrumX' + j, game.opponentStrums.members[j].x);
+		game.setOnScripts('defaultOpponentStrumY' + j, game.opponentStrums.members[j].y);
 	}
 }
 
