@@ -64,9 +64,9 @@ function onCreatePost() {
 
 	var xValues = getMinAndMax(game.timeTxt.width, game.timeBar.width);
 	var yValues = getMinAndMax(game.timeTxt.height, game.timeBar.height);
-	game.timeTxt.x = game.timeBar.x - ((xValues[0] - xValues[1]) / 2);
-	game.timeTxt.y = game.timeBar.y - ((game.timeTxt.height / 2));
 	game.timeTxt.setFormat(Paths.font(settings.get("font")), 32 * settings.get("fontScale"), 0xFFFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
+	game.timeTxt.x = game.timeBar.x - ((xValues[0] - xValues[1]) / 2);
+	game.timeTxt.y = game.timeBar.y + ((game.timeBar.height / 2) - (game.timeTxt.height / 2));
 	game.timeTxt.borderSize = 2.5 * settings.get("fontScale");
 	game.timeBar.leftBar.color = 0xFF37FF14;
 	game.timeBar.rightBar.color = 0xFF808080;
