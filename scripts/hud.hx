@@ -15,7 +15,6 @@ import openfl.Lib;
 var settings:StringMap = [
 	"font" => "comic.ttf", // if you want the regular vcr font, just replace "comic.ttf" with "vcr.ttf"
 	"fontScale" => 1, // only use this if your font is too small
-	"windowTabChange" => false, // pretty self-explanatory
 ];
 
 var credits:StringMap = [
@@ -34,16 +33,11 @@ var creditsWatermark:FlxText;
 var ogIconSize:Array<Array<Int>> = [];
 function onCreatePost() {
 	game.setOnHScript("dnbFont", settings.get("font"));
-	
+
 	if (settings.get("font") == "comic.ttf")
 		Main.fpsVar.defaultTextFormat = new TextFormat(Paths.font('comic.ttf'), 15, 0xFFFFFF, true);
 	else
 		Main.fpsVar.defaultTextFormat = new TextFormat("_sans", 12, 0xFFFFFF, false);
-
-	if (settings.get("windowTabChange")) {
-    	Application.current.window.setIcon(Image.fromFile(Paths.modFolders('images/windowIcons/dave.png'))); // thx to drawoon for the og icon code!
-		Lib.application.window.title = "Friday Night Funkin' | VS. Dave and Bambi v3.0b";
-	}
 	
 	game.showCombo = true;
 
@@ -71,7 +65,7 @@ function onCreatePost() {
 	var xValues = getMinAndMax(game.timeTxt.width, game.timeBar.width);
 	var yValues = getMinAndMax(game.timeTxt.height, game.timeBar.height);
 	game.timeTxt.x = game.timeBar.x - ((xValues[0] - xValues[1]) / 2);
-	game.timeTxt.y = game.timeBar.y + ((yValues[0] - yValues[1]) / (settings.get("font") == "comic.ttf" ? 1 : 2));
+	game.timeTxt.y = game.timeBar.y - ((game.timeTxt.height / 2));
 	game.timeTxt.setFormat(Paths.font(settings.get("font")), 32 * settings.get("fontScale"), 0xFFFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
 	game.timeTxt.borderSize = 2.5 * settings.get("fontScale");
 	game.timeBar.leftBar.color = 0xFF37FF14;
@@ -138,7 +132,7 @@ function onUpdatePost() {
 	game.iconP1.origin.set(0, 0);
 	game.iconP2.origin.set(0, 0);
 
-	game.scoreTxt.text = 'Score:' + game.songScore + ' | Misses:' + game.songMisses + ' | Accuracy:' + truncateFloat(game.ratingPercent * 100, 2) + '%';
+	game.scoreTxt.text = 'Score: ' + game.songScore + ' | Misses: ' + game.songMisses + ' | Accuracy: ' + truncateFloat(game.ratingPercent * 100, 2) + '%';
 	if (game.camZooming) {
 		game.camGame.zoom = FlxMath.lerp(game.defaultCamZoom, game.camGame.zoom, 0.95);
 		game.camHUD.zoom = FlxMath.lerp(1, game.camHUD.zoom, 0.95);
@@ -155,27 +149,14 @@ function onBeatHit() {
 	iconProp2.updateHitbox();
 }
 
-function goodNoteHit() { // thx gabi!
-	for (i in game.members)
-		if (i != null && Std.isOfType(i, FlxSprite) && i.exists && i.velocity.y != 0 && i.acceleration.y != 0) {
-			i.camera = game.camGame;
-			i.x -= ClientPrefs.data.comboOffset[0];
-			i.y += ClientPrefs.data.comboOffset[1];
-		}
-}
+function goodNoteHit() {game.comboGroup.camera = game.camGame;}
 
 function onEvent(n:String, v1:String) {
 	if (n == 'Change Character')
 		reloadIcons(v1);
 }
 
-function onDestroy() {
-	Main.fpsVar.defaultTextFormat = new TextFormat("_sans", 14, 0xFFFFFF, false);
-	if (settings.get("windowTabChange")) {
-		Application.current.window.setIcon(Image.fromFile(Paths.modFolders('images/windowIcons/icon16.png')));
-		Lib.application.window.title = "Friday Night Funkin': Psych Engine";
-	}
-}
+function onDestroy() {Main.fpsVar.defaultTextFormat = new TextFormat("_sans", 14, 0xFFFFFF, false);}
 
 // functions
 

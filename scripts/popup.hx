@@ -58,7 +58,7 @@ function onSongStart() {
 	creditsPopup.camera = game.camHUD;
 	creditsPopup.scrollFactor.set();
 	creditsPopup.x = creditsPopup.width * -1;
-	add(creditsPopup);
+	game.uiGroup.add(creditsPopup);
 
 	FlxTween.tween(creditsPopup, {x: 0}, 0.5 / game.playbackRate, {ease: FlxEase.backOut, onComplete: function(tweeen:FlxTween)
 	{
