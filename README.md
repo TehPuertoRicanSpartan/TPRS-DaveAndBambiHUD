@@ -1,5 +1,5 @@
 # TPRS' Dave & Bambi HUD
-DISCLAIMER: This HUD script is for "Actions" build only! You can download it [here](https://github.com/ShadowMario/FNF-PsychEngine/actions).
+DISCLAIMER: This HUD script is for "Actions" build only! You can download it [here](https://github.com/ShadowMario/FNF-PsychEngine/actions/workflows/main.yml).
 
 Credits to MoldyGH and his team who developed [the original mod](https://gamebanana.com/mods/43201)!
 # Installing
