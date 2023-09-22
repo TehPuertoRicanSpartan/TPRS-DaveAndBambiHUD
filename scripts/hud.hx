@@ -115,19 +115,34 @@ function onCountdownStarted() {
 
 function onUpdatePost() {
 	var thingy = 0.88;
+	var healthFlip = game.healthBar.leftToRight;
 	iconProp1.setGraphicSize(Std.int(FlxMath.lerp(ogIconSize[0][0], iconProp1.width, thingy)), Std.int(FlxMath.lerp(ogIconSize[0][1], iconProp1.height, thingy)));
 	iconProp1.updateHitbox();
 	iconProp2.setGraphicSize(Std.int(FlxMath.lerp(ogIconSize[1][0], iconProp2.width, thingy)), Std.int(FlxMath.lerp(ogIconSize[1][1], iconProp2.height, thingy)));
 	iconProp2.updateHitbox();
 
 	var iconOffset = 26;
-	game.iconP1.x = game.healthBar.x + (game.healthBar.width * (FlxMath.remapToRange(game.healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
-	game.iconP2.x = game.healthBar.x
-		+ (game.healthBar.width * (FlxMath.remapToRange(game.healthBar.percent, 0, 100, 100, 0) * 0.01))
-		- (game.iconP2.width - iconOffset);
+	if (healthFlip) {
+		game.iconP2.flipX = true;
+		game.iconP1.flipX = true;
+		var bfArray = game.boyfriend.healthColorArray;
+		var dadArray = game.dad.healthColorArray;
+		game.healthBar.leftBar.color = FlxColor.fromRGB(bfArray[0], bfArray[1], bfArray[2]);
+		game.healthBar.rightBar.color = FlxColor.fromRGB(dadArray[0], dadArray[1], dadArray[2]);
+		game.iconP2.x = game.healthBar.x + (game.healthBar.width * (FlxMath.remapToRange(100 - game.healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
+		game.iconP1.x = game.healthBar.x + (game.healthBar.width * (FlxMath.remapToRange(100 - game.healthBar.percent, 0, 100, 100, 0) * 0.01)) - (game.iconP1.width - iconOffset);
+	} else {
+		game.iconP1.x = game.healthBar.x + (game.healthBar.width * (FlxMath.remapToRange(game.healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
+		game.iconP2.x = game.healthBar.x + (game.healthBar.width * (FlxMath.remapToRange(game.healthBar.percent, 0, 100, 100, 0) * 0.01)) - (game.iconP2.width - iconOffset);
+	}
 
-	game.iconP1.scale.set(iconProp1.width / 150, iconProp1.height / 150);
-	game.iconP2.scale.set(iconProp2.width / 150, iconProp2.height / 150);
+	if (healthFlip) {
+		game.iconP1.scale.set(iconProp1.width / 150, iconProp1.height / 150);
+		game.iconP2.scale.set(iconProp2.width / 150, iconProp2.height / 150);
+	} else {
+		game.iconP1.scale.set(iconProp2.width / 150, iconProp2.height / 150);
+		game.iconP2.scale.set(iconProp1.width / 150, iconProp1.height / 150);
+	}
 
 	game.iconP1.origin.set(0, 0);
 	game.iconP2.origin.set(0, 0);
