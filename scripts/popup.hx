@@ -17,7 +17,7 @@ var funnyIcon:FlxSprite;
 var creditsPopup:FlxTypedSpriteGroup;
 
 function onCreatePost() {
-	var info = (songHeading.get(PlayState.SONG.song.toLowerCase()) == null ? ['daveHeading', false, [false], 0, 'Kawai Sprite', 'credits/kawaisprite'] : songHeading.get(PlayState.SONG.song.toLowerCase()));
+	var info = (songHeading.get(PlayState.SONG.song.toLowerCase()) == null ? ['daveHeading', false, [false], 0, '???', 'credits/missing_icon'] : songHeading.get(PlayState.SONG.song.toLowerCase()));
 
 	creditsPopup = new FlxTypedSpriteGroup(FlxG.width, 200);
 
