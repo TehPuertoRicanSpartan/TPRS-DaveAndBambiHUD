@@ -143,6 +143,8 @@ function onUpdatePost() {
 	game.iconP2.origin.set(0, 0);
 
 	game.scoreTxt.text = 'Score: ' + game.songScore + ' | Misses: ' + game.songMisses + ' | Accuracy: ' + truncateFloat(game.ratingPercent * 100, 2) + '%';
+	game.scoreTxt.scale.set(1, 1);
+	game.scoreTxt.updateHitbox();
 	if (game.camZooming) {
 		game.camGame.zoom = FlxMath.lerp(game.defaultCamZoom, game.camGame.zoom, 0.95);
 		game.camHUD.zoom = FlxMath.lerp(1, game.camHUD.zoom, 0.95);
