@@ -2,14 +2,9 @@ import Main;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.text.FlxTextBorderStyle;
-import flixel.util.FlxStringUtil;
 import haxe.ds.StringMap;
 import openfl.text.TextFormat;
 import flixel.FlxBasic;
-import lime.app.Application;
-import lime.graphics.Image;
-import openfl.Lib;
-
 // you can configure these below
 
 var settings:StringMap = [
