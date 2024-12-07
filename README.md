@@ -1,6 +1,8 @@
 # TPRS' Dave & Bambi HUD
 DISCLAIMER: This HUD script is for v0.7.x and v1.x only! You can download it [here](https://github.com/ShadowMario/FNF-PsychEngine/releases/latest/).
 
+I will also not implement the new HUD from the recent teasers, it's discontinued because I got banned from the Psych Engine server.
+
 Credits to MoldyGH and his team who developed [the original mod](https://gamebanana.com/mods/43201)!
 # Installing
 Make sure your Psych Engine build supports modding AND HScript/SScript.
